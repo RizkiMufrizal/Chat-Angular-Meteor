@@ -8,7 +8,7 @@ const name = 'home';
 
 export default angular.module(name, [
   angularMeteor,
-  uiRouter,
+  uiRouter
 ])
   .component(name, {
     template,
@@ -18,8 +18,7 @@ export default angular.module(name, [
 
     $stateProvider
       .state('home', {
-        url: '/home',
+        url: '/',
         template: '<home></home>'
       });
-
   });
