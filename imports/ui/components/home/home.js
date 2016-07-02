@@ -9,18 +9,17 @@ const name = 'home';
 export default angular.module(name, [
   angularMeteor,
   uiRouter,
-]).component(name, {
-  template,
-})
-  .config(config);
+])
+  .component(name, {
+    template,
+  })
+  .config(function config($stateProvider) {
+    'ngInject';
 
-function config($stateProvider) {
-  'ngInject';
+    $stateProvider
+      .state('home', {
+        url: '/home',
+        template: '<home></home>'
+      });
 
-  $stateProvider
-    .state('home', {
-      url: '/home',
-      template: '<home></home>'
-    });
-
-}
+  });

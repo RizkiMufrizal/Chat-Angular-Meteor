@@ -11,12 +11,12 @@ export default angular.module(name, [
   angularMeteor,
   uiRouter,
   Home
-]).component(name, {
-  template
-}).config(config);
+])
+  .component(name, {
+    template
+  })
+  .config(function config($urlRouterProvider) {
+    'ngInject';
 
-function config($urlRouterProvider) {
-  'ngInject';
-
-  $urlRouterProvider.otherwise('/home');
-}
+    $urlRouterProvider.otherwise('/home');
+  });
