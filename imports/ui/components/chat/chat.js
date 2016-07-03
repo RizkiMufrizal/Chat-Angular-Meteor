@@ -4,7 +4,6 @@ import uiRouter from 'angular-ui-router';
 
 import template from './chat.html';
 import { Chats } from '../../../api/chats';
-import { Users } from '../../../api/users';
 
 class Chat {
   constructor($scope, $reactive) {
