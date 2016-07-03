@@ -50,7 +50,7 @@ export default angular.module(name, [
     controllerAs: name,
     controller: User
   })
-  .config(function config($stateProvider) {
+  .config(function($stateProvider) {
     'ngInject';
 
     $stateProvider
