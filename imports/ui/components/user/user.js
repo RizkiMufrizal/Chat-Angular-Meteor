@@ -17,7 +17,13 @@ class User {
   }
 
   register(user) {
-    Accounts.createUser(user, function(error) {
+    Accounts.createUser({
+      username: user.username,
+      password: user.password,
+      profile: {
+        status: 'daftar'
+      }
+    }, function(error) {
       if (error) {
         console.log(error);
       }
@@ -31,6 +37,19 @@ class User {
       if (typeof error !== 'undefined') {
         alert(error.reason);
       } else {
+        var user = Meteor.users.findOne(Meteor.userId());
+
+        Meteor.users.update(
+          {
+            _id: user._id
+          }, {
+            $set: {
+              profile: {
+                status: 'online'
+              }
+            }
+          }
+        );
         alert('berhasil login');
         _state.go('chat');
       }
