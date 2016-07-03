@@ -3,7 +3,14 @@ import { Chats } from '../imports/api/chats';
 
 Meteor.startup(() => {
   Chats.remove({});
-  Meteor.users.remove({});
+});
+
+Meteor.publish('chats', function() {
+  return Chats.find();
+});
+
+Meteor.publish('users', function() {
+  return Meteor.users.find();
 });
 
 Meteor.users.allow({
@@ -18,5 +25,11 @@ Meteor.users.allow({
 Chats.allow({
   insert(userId, chat) {
     return userId && chat.userId === userId;
+  }
+});
+
+Meteor.methods({
+  newChat(chat) {
+    Chats.insert(chat);
   }
 });
