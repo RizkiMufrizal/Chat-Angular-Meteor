@@ -23,8 +23,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/authentication">
+                    <a ng-if="app.userLogin === null" href="/authentication">
                         Sign In
+                    </a>
+                    <a ng-if="app.userLogin !== null" href="#" ng-click="app.logout()">
+                        Sign Out
                     </a>
                 </li>
             </ul>
