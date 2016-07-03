@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-md-3">
         <ul class="list-group">
-            <li class="list-group-item">cek</li>
+            <li ng-repeat="u in chat.dataUsers" class="list-group-item">
+              <span ng-if="u.profile.status === 'online'" class="label label-success">{{u.username}}</span>
+              <span ng-if="u.profile.status === 'offline'" class="label label-danger">{{u.username}}</span>
+              <span ng-if="u.profile.status === 'daftar'" class="label label-default">{{u.username}}</span>
+            </li>
         </ul>
     </div>
     <div class="col-md-9">
@@ -11,12 +15,12 @@
             </div>
             <div class="panel-body">
                 <ul class="list-group" ng-repeat="c in chat.dataChats">
-                    <li class="list-group-item list-group-item-success text-right" ng-if="c.username == chat.userChat">
+                    <li class="list-group-item list-group-item-success text-right" ng-if="c.userId == chat.userId">
                         <h4 class="list-group-item-heading">{{c.username}}</h4>
                         <p class="list-group-item-text">{{c.pesan}}</p>
                         <h6 class="list-group-item-text">{{c.waktu | amDateFormat: 'HH:MM'}}</h6>
                     </li>
-                    <li class="list-group-item" ng-if="c.username !== chat.userChat">
+                    <li class="list-group-item" ng-if="c.userId !== chat.userId">
                         <h4 class="list-group-item-heading">{{c.username}}</h4>
                         <p class="list-group-item-text">{{c.pesan}}</p>
                         <h6 class="list-group-item-text">{{c.waktu | amDateFormat: 'HH:MM'}}</h6>
