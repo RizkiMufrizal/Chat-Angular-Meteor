@@ -15,15 +15,20 @@ class Chat {
     this.helpers({
       dataChats() {
         return Chats.find({});
+      },
+      dataUsers() {
+        return Meteor.users.find({});
       }
     });
 
     this.inputChat = {};
-    this.userChat = 'rizki mufrizal';
+    this.userId = Meteor.userId();
   }
 
   sendChat(chat) {
-    chat.username = 'rizki mufrizal';
+    var user = Meteor.users.findOne(Meteor.userId());
+    chat.username = user.username;
+    chat.userId = Meteor.userId();
     chat.waktu = new Date();
     Chats.insert(chat);
     this.inputChat = {};
