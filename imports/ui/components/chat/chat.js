@@ -12,6 +12,9 @@ class Chat {
 
     $reactive(this).attach($scope);
 
+    Meteor.subscribe('chats');
+    Meteor.subscribe('users');
+
     this.helpers({
       dataChats() {
         return Chats.find({});
@@ -30,7 +33,11 @@ class Chat {
     chat.username = user.username;
     chat.userId = Meteor.userId();
     chat.waktu = new Date();
-    Chats.insert(chat);
+    Meteor.call('newChat', chat, (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
     this.inputChat = {};
   }
 
