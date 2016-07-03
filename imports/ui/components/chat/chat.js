@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -14,9 +15,6 @@ class Chat {
     this.helpers({
       dataChats() {
         return Chats.find({});
-      },
-      dataUsers() {
-        return Users.find({});
       }
     });
 
@@ -44,12 +42,21 @@ export default angular.module(name, [
     controllerAs: name,
     controller: Chat
   })
-  .config(function config($stateProvider) {
+  .config(function($stateProvider) {
     'ngInject';
 
     $stateProvider
       .state('chat', {
         url: '/chat',
-        template: '<chat></chat>'
+        template: '<chat></chat>',
+        resolve: {
+          currentUser($q) {
+            if (Meteor.userId() === null) {
+              return $q.reject('AUTH_REQUIRED');
+            } else {
+              return $q.resolve();
+            }
+          }
+        }
       });
   });
