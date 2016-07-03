@@ -15,10 +15,27 @@ class App {
     $reactive(this).attach($scope);
     _state = $state;
 
-    this.userLogin = Meteor.userId();
+    this.helpers({
+      userLogin() {
+        return Meteor.userId();
+      }
+    });
   }
 
   logout() {
+    var user = Meteor.users.findOne(Meteor.userId());
+
+    Meteor.users.update(
+      {
+        _id: user._id
+      }, {
+        $set: {
+          profile: {
+            status: 'offline'
+          }
+        }
+      }
+    );
     Meteor.logout();
     _state.go('user');
   }
