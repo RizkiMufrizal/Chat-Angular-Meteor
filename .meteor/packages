@@ -20,3 +20,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 urigo:static-templates
 pbastowski:angular-babel
 less
+accounts-password
