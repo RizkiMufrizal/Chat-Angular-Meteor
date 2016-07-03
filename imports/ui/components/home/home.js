@@ -13,7 +13,7 @@ export default angular.module(name, [
   .component(name, {
     template,
   })
-  .config(function config($stateProvider) {
+  .config(function($stateProvider) {
     'ngInject';
 
     $stateProvider
