@@ -7,6 +7,7 @@ import template from './app.html';
 import { name as Home } from '../home/home';
 import { name as Chat } from '../chat/chat';
 import { name as User } from '../user/user';
+import { name as About } from '../about/about';
 
 class App {
   constructor($scope, $reactive, $state) {
@@ -48,7 +49,8 @@ export default angular.module(name, [
   uiRouter,
   Chat,
   Home,
-  User
+  User,
+  About
 ])
   .component(name, {
     template,
@@ -64,11 +66,9 @@ export default angular.module(name, [
   .run(function($rootScope, $state) {
     'ngInject';
 
-    $rootScope.$on('$stateChangeError',
-      (event, toState, toParams, fromState, fromParams, error) => {
-        if (error === 'AUTH_REQUIRED') {
-          $state.go('user');
-        }
+    $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
+      if (error === 'AUTH_REQUIRED') {
+        $state.go('user');
       }
-    );
+    });
   });
